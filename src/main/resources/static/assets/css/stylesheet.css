@@ -1,0 +1,24 @@
+  p {
+            color:red;
+      }
+
+  h3 {
+            color:green;
+       }
+
+   p.bird {
+            color: #42ffff;
+             font-family:courier;
+        }
+
+   p#kingfisher {
+            color:blue;
+    }
+
+    p:hover {
+        color: #42c2f4;
+    }
+
+    #myraven:hover {
+        content:url("/assets/images/kingfisher.jpg");
+    }
