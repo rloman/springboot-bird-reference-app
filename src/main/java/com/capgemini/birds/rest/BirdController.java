@@ -39,4 +39,14 @@ public class BirdController {
         return result;
     }
 
+    @PutMapping("{id}")
+    public Bird updateById(@PathVariable long id, @RequestBody Bird update) {
+
+       return this.birdRepository.update(id, update);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable long id) {
+        this.birdRepository.deleteById(id);
+    }
 }
