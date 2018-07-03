@@ -1,11 +1,24 @@
 package com.capgemini.birds.model;
 
-public class Bird {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+public class Bird implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String name;
+
     private int age;
+
     private int serialNumber;
+
+    public Bird() {
+
+    }
 
     public String getName() {
         return name;

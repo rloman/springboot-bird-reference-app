@@ -4,9 +4,8 @@ import com.capgemini.birds.model.Bird;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class BirdRepository {
@@ -49,6 +48,18 @@ public class BirdRepository {
     public void deleteById(long id) {
 
         this.birds.remove(id);
+    }
+
+
+
+    // some method to demo return a sorted based on property list
+    public List<Bird> birdsWithAgeLargerThanFour() {
+        Collection<Bird> allBirds = this.findAll();
+        List<Bird> result = allBirds.stream().filter( bird -> bird.getAge() > 4).collect(Collectors.toList());
+
+        Collections.sort(result, (a,b) -> a.getAge() - b.getAge());
+
+        return result;
     }
 
     public Bird update(long id, Bird update) {
