@@ -3,12 +3,11 @@ package com.capgemini.birds.rest;
 import com.capgemini.birds.model.Bird;
 import com.capgemini.birds.persistence.BirdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/birds")
@@ -19,34 +18,55 @@ public class BirdController {
 
 
     @PostMapping
-    public Bird create(@RequestBody Bird newBird) {
+    public ResponseEntity<Bird> create(@RequestBody Bird newBird) {
 
         this.birdRepository.save(newBird);
 
-        return newBird;
+        return new ResponseEntity<Bird>(newBird, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public Collection<Bird> list() {
-        return this.birdRepository.findAll();
+    public ResponseEntity<Iterable<Bird>> list() {
+        return new ResponseEntity<Iterable<Bird>>(this.birdRepository.findAll(),
+                HttpStatus.OK);
     }
 
     @GetMapping("{id}")
-    public Bird findById(@PathVariable long id) {
+    public ResponseEntity<Bird> findById(@PathVariable long id) {
 
-        Bird result = this.birdRepository.findById(id);
+        Optional<Bird> result = this.birdRepository.findById(id);
 
-        return result;
+        if (result.isPresent()) {
+            return new ResponseEntity<Bird>(result.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("{id}")
-    public Bird updateById(@PathVariable long id, @RequestBody Bird update) {
+    public ResponseEntity<Bird> updateById(@PathVariable long id, @RequestBody Bird update) {
 
-       return this.birdRepository.update(id, update);
+        Optional<Bird> possibleVictim = this.birdRepository.findById(id);
+
+        if (possibleVictim.isPresent()) {
+            Bird victim = possibleVictim.get();
+
+            victim.setAge(update.getAge());
+            victim.setName(update.getName());
+            victim.setSerialNumber(update.getSerialNumber());
+
+            victim = this.birdRepository.save(victim);
+
+            return new ResponseEntity<Bird>(this.birdRepository.save(victim),
+                    HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Bird>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("{id}")
-    public void deleteById(@PathVariable long id) {
+    public ResponseEntity<?> deleteById(@PathVariable long id) {
         this.birdRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
