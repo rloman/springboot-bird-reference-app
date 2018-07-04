@@ -12,9 +12,12 @@ public class Bird implements Serializable {
 
     private String name;
 
+    @Column(nullable = false, length = 3)
     private int age;
 
     private int serialNumber;
+
+    private long ringNumber;
 
     public Bird() {
 
