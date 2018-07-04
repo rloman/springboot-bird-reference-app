@@ -10,14 +10,12 @@ public class Bird implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+	@Column(nullable = false, length = 3) // this sets the int age not able to be null / empty
     private String name;
 
-    @Column(nullable = false, length = 3)
     private int age;
 
     private int serialNumber;
-
-    private long ringNumber;
 
     public Bird() {
 

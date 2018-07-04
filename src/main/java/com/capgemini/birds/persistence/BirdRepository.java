@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface BirdRepository extends CrudRepository<Bird, Long>{
+public interface BirdRepository extends CrudRepository<Bird, Long> {
 
 
 }

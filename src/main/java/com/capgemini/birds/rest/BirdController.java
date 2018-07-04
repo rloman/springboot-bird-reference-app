@@ -18,11 +18,11 @@ public class BirdController {
 
 
     @PostMapping
-    public Bird create(@RequestBody Bird newBird) {
+    public ResponseEntity<Bird> create(@RequestBody Bird newBird) {
 
         this.birdRepository.save(newBird);
 
-        return newBird;
+        return new ResponseEntity<Bird>(newBird, HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -46,7 +46,7 @@ public class BirdController {
     @PutMapping("{id}")
     public ResponseEntity<Bird> updateById(@PathVariable long id, @RequestBody Bird update) {
 
-        Optional<Bird> possibleVictim = this.birdRepository.findById(id);  // rloman change this
+        Optional<Bird> possibleVictim = this.birdRepository.findById(id);
 
         if (possibleVictim.isPresent()) {
             Bird victim = possibleVictim.get();
@@ -65,10 +65,8 @@ public class BirdController {
     }
 
     @DeleteMapping("{id}")
-    // rloman uitzoeken of dit met void OK gaat
     public ResponseEntity<?> deleteById(@PathVariable long id) {
         this.birdRepository.deleteById(id);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
