@@ -17,10 +17,6 @@ public interface BirdRepository extends CrudRepository<Bird, Long> {
     // the attributes
     Iterable<Bird> findAllByNameAndAge(String voornaam, int leeftijd);
 
-    Bird findByWeight(int weight);
-
-    @Query("delete all from something;") // for demo only!!!
-    void deleteAll() ;
 }
 
 
