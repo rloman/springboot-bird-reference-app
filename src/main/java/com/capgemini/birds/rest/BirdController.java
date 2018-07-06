@@ -27,6 +27,7 @@ public class BirdController {
 
     @GetMapping
     public ResponseEntity<Iterable<Bird>> list() {
+
         return new ResponseEntity<Iterable<Bird>>(this.birdRepository.findAll(),
                 HttpStatus.OK);
     }
@@ -35,6 +36,9 @@ public class BirdController {
     public ResponseEntity<Bird> findById(@PathVariable long id) {
 
         Optional<Bird> result = this.birdRepository.findById(id);
+
+		// example
+        Bird birdWithNameShana = this.birdRepository.findByName("Shana");
 
         if (result.isPresent()) {
             return new ResponseEntity<Bird>(result.get(), HttpStatus.OK);
