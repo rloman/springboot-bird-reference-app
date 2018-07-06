@@ -10,12 +10,14 @@ public class Bird implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-	@Column(nullable = false, length = 3) // this sets the int age not able to be null / empty
+	@Column(nullable = false, length = 35) // this sets the int age not able to be null / empty
     private String name;
 
     private int age;
 
     private int serialNumber;
+
+    private String city;
 
     public Bird() {
 
@@ -51,5 +53,13 @@ public class Bird implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+	public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
