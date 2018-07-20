@@ -1,5 +1,6 @@
 package com.capgemini.birds.rest;
 
+import com.capgemini.birds.examstuff.component.MyOwnComponent;
 import com.capgemini.birds.model.Bird;
 import com.capgemini.birds.persistence.BirdRepository;
 import com.capgemini.birds.service.BirdService;
@@ -17,11 +18,21 @@ public class BirdController {
     @Autowired
     private BirdService birdService;
 
+    @Autowired
+    private Bird rachid;
+
+    @Autowired
+    private String companyName;
+
 
     @PostMapping
     public ResponseEntity<Bird> create(@RequestBody Bird newBird) {
 
+        newBird.setCompanyName(this.companyName);
+
         this.birdService.save(newBird);
+
+//        this.birdService.save(this.rachid);
 
         return new ResponseEntity<Bird>(newBird, HttpStatus.CREATED);
     }

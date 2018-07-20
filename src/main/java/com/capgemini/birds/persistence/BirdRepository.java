@@ -17,7 +17,7 @@ public interface BirdRepository extends CrudRepository<Bird, Long> {
     // the attributes
     Iterable<Bird> findAllByNameAndAge(String voornaam, int leeftijd);
 
-    Iterable<Bird> findAllByIdOrderByFirstname(Iterable<Long> ids);
+    Iterable<Bird> findAllByIdOrderByName(Iterable<Long> ids);
 
 }
 
