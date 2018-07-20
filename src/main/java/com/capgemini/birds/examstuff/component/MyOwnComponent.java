@@ -18,12 +18,6 @@ public class MyOwnComponent {
     @Autowired
     private Bird hielke;
 
-    /*
-    @Autowired
-    private SSL ssl1;
-
-*/
-
     public int add(int a, int b) {
         return a+b;
     }

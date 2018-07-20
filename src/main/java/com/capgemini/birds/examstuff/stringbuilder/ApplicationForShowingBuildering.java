@@ -21,10 +21,6 @@ public class ApplicationForShowingBuildering {
 
         String stringBuildFromTheBuilder = aComputerBuilder.toString();
 
-        /// THIS IS TO EXPERIMENT
-//        assert computer != stringBuildFromTheBuilder;
-
-        // this is the way to do normally
         assert computer.equals(stringBuildFromTheBuilder) : "computer and stringBuildFronTheBuilder should be the same here";
     }
 }

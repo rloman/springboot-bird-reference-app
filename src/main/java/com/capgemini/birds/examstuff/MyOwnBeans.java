@@ -43,22 +43,8 @@ public class MyOwnBeans {
         return result;
     }
 
-    /*
-    @Bean
-    public SSL ssl1() {
-
-        SSL result = new SSL();
-        result.setBIO(3,4,5);
-
-        return result;
-    }
-    */
-
     @Bean
     public String companyName() {
         return "Capgemini";
     }
-
-
-
 }
