@@ -18,6 +18,7 @@ public class Bird implements Serializable {
     private int serialNumber;
 
     private String city;
+    private String companyName;
 
     public Bird() {
 
@@ -61,5 +62,9 @@ public class Bird implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 }
